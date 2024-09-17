@@ -1,0 +1,59 @@
+{
+    "data": [
+        {
+            "rateId": "unique-rate-id-1",
+            "fixedRate": 7.8,
+            "startDate": "2024-03-01",
+            "endDate": "2029-03-01",
+            "rateType": "Fixed Rate",
+            "currency": "NZD",
+            "period": 1,
+            "description": "1-year fixed rate at 7.8% for home loan",
+            "status": "Active"
+        },
+        {
+            "rateId": "unique-rate-id-2",
+            "fixedRate": 7.3,
+            "startDate": "2024-03-01",
+            "endDate": "2029-03-01",
+            "rateType": "Fixed Rate",
+            "currency": "NZD",
+            "period": 1.5,
+            "description": "18-months fixed rate at 7.3% for home loan",
+            "status": "Active"
+        },
+        {
+            "rateId": "unique-rate-id-3",
+            "fixedRate": 7.0,
+            "startDate": "2024-03-01",
+            "endDate": "2029-03-01",
+            "rateType": "Fixed Rate",
+            "currency": "NZD",
+            "period": 2,
+            "description": "2-year fixed rate at 7.0% for home loan",
+            "status": "Active"
+        },
+        {
+            "rateId": "unique-rate-id-4",
+            "fixedRate": 6.6,
+            "startDate": "2024-05-01",
+            "endDate": "2029-05-01",
+            "rateType": "Fixed Rate",
+            "currency": "NZD",
+            "period": 3,
+            "description": "3-year fixed rate at 6.6% for investment account",
+            "status": "Active"
+        },
+        {
+            "rateId": "unique-rate-id-5",
+            "fixedRate": 6.2,
+            "startDate": "2024-01-01",
+            "endDate": "2029-01-01",
+            "rateType": "Fixed Rate",
+            "currency": "NZD",
+            "period": 5,
+            "description": "5-year fixed rate at 6.2% for home loan",
+            "status": "Active"
+        }
+    ]
+}

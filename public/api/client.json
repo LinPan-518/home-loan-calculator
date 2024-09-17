@@ -1,0 +1,18 @@
+{
+    "data": {
+      "clientId": "123e4567-e89b-12d3-a456-426614174000",
+      "clientName": "John Albert",
+      "dob": "1985-06-15",
+      "irdNumber": "123-456-789",
+      "citizenship": "New Zealand",
+      "phoneNumber": "+64 21 123 4567",
+      "email": "john.albert@example.com",
+      "status": "Active",
+      "salutation": "he/him",
+      "country": "NZ",
+      "currency": "NZD",
+      "avatar": "",
+      "timeZone": "Pacific/Auckland"
+    }
+  }
+  
