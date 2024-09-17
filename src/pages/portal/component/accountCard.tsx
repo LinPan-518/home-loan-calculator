@@ -22,7 +22,7 @@ import { Account } from "types";
 import { Colors } from "style/color";
 
 import StyledBox from "component/muiComponent/flexBox";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector } from "store";
 
 interface IProps {
   account: Account;
@@ -30,13 +30,8 @@ interface IProps {
   hideWarning?: boolean;
 }
 
-export function AccountCard({
-  account,
-  hideRedirect = false,
-  hideWarning = false,
-}: IProps) {
-  const symbol = useAppSelector((state) => state.client.currencySymbol);
-  const direction = useAppSelector((state) => state.client.currencyDirection);
+export function AccountCard({ account, hideRedirect = false, hideWarning = false }: IProps) {
+  const { currencySymbol: symbol, currencyDirection: direction } = useAppSelector((store) => store.client);
 
   const accountDetail = useMemo(
     () => `${account.loanType} at ${account.interestRate}%
@@ -68,14 +63,10 @@ export function AccountCard({
         <Typography variant="body1">
           <span>{account.accountNumber}</span> | <span>{accountDetail}</span>
         </Typography>
-        <Typography sx={{ mt: 1.5 }}>
-          Next repayment {formatDateToTimezone(account.nextPaymentDate)}
-        </Typography>
+        <Typography sx={{ mt: 1.5 }}>Next repayment {formatDateToTimezone(account.nextPaymentDate)}</Typography>
         {!hideRedirect && (
           <Link href={`/account/${account.accountId}`}>
-            <Typography sx={{ color: "text.secondary" }}>
-              View more details
-            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>View more details</Typography>
           </Link>
         )}
       </StyledBox>

@@ -5,7 +5,7 @@ import { camelCaseToTitleCase } from "utils/helper";
 import { formatDateToTimezone } from "utils/dateTimeHelper";
 import { convertToCurrencyUnit } from "utils/currencyHelper";
 import StyledBox from "component/muiComponent/flexBox";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector } from "store";
 
 interface LoanSummary {
   fixedRate: number;
@@ -68,10 +68,7 @@ const RepaymentCard = ({ loan, title, isNew }: IPropsLoan) => {
             padding: "10px",
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{ textAlign: "center", fontWeight: "bold" }}
-          >
+          <Typography variant="h5" sx={{ textAlign: "center", fontWeight: "bold" }}>
             {title} Loan
           </Typography>
         </Box>
@@ -93,9 +90,7 @@ const RepaymentCard = ({ loan, title, isNew }: IPropsLoan) => {
                   <strong>{formatValue(key, value)}</strong>
                 </Typography>
               ) : (
-                <Typography color="textPrimary">
-                  {formatValue(key, value)}
-                </Typography>
+                <Typography color="textPrimary">{formatValue(key, value)}</Typography>
               )}
             </StyledBox>
           );

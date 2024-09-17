@@ -48,13 +48,7 @@ const initialState: LoanSummary = {
   period: 0,
 };
 
-const ReviewForm = ({
-  handleSubmit,
-  handlePreviousStep,
-  account,
-  formValue,
-  rateOptions,
-}: IProps) => {
+const ReviewForm = ({ handleSubmit, handlePreviousStep, account, formValue, rateOptions }: IProps) => {
   const previousSummary: LoanSummary = {
     fixedRate: account?.interestRate ?? 0,
     startDate: account?.effectiveDate ?? "",
@@ -65,17 +59,13 @@ const ReviewForm = ({
     period: account?.period ?? 0,
   };
 
-  const [currentRepayment, setCurrentRepayment] =
-    useState<LoanSummary>(initialState);
+  const [currentRepayment, setCurrentRepayment] = useState<LoanSummary>(initialState);
 
   const [minimalRepay, setMinimalRepay] = useState(0);
   const [maximumRepay, setMaximumlRepay] = useState(0);
 
   const calculateRepaymentInfo = (targetRate: Rate) => {
-    const diffYear = calculateYearsBetweenDates(
-      account?.effectiveDateEnd ?? "",
-      account?.maturityDate ?? "",
-    );
+    const diffYear = calculateYearsBetweenDates(account?.effectiveDateEnd ?? "", account?.maturityDate ?? "");
     const monthlyRepayment = calculateRepayment({
       loanAmount: account?.remainingBalance ?? 0,
       loanTermYears: diffYear,
@@ -87,10 +77,7 @@ const ReviewForm = ({
     setCurrentRepayment({
       fixedRate: targetRate.fixedRate ?? 0,
       startDate: account?.effectiveDateEnd ?? "",
-      endDate: calculateEndDate(
-        account?.effectiveDateEnd ?? "",
-        targetRate.period,
-      ),
+      endDate: calculateEndDate(account?.effectiveDateEnd ?? "", targetRate.period),
       maturityDate: account?.maturityDate ?? "",
       rateType: account?.loanType ?? "",
       loanAmount: account?.remainingBalance ?? 0,
@@ -101,9 +88,7 @@ const ReviewForm = ({
 
   useEffect(() => {
     if (rateOptions.length > 0 && formValue?.rateId) {
-      let targetRate = rateOptions.find(
-        (rate) => rate.rateId === formValue?.rateId,
-      );
+      let targetRate = rateOptions.find((rate) => rate.rateId === formValue?.rateId);
       if (targetRate) {
         calculateRepaymentInfo(targetRate);
       }
@@ -118,10 +103,7 @@ const ReviewForm = ({
   }, [currentRepayment?.endDate]);
 
   const calculateMax = () => {
-    const diffYear = calculateYearsBetweenDates(
-      currentRepayment.startDate,
-      currentRepayment.endDate,
-    );
+    const diffYear = calculateYearsBetweenDates(currentRepayment.startDate, currentRepayment.endDate);
     const monthlyRepayment = calculateRepayment({
       loanAmount: account?.remainingBalance || 0,
       loanTermYears: diffYear,
@@ -132,9 +114,7 @@ const ReviewForm = ({
   };
 
   const handleNewPayment = (repay: number | undefined) => {
-    let repayValue = repay
-      ? repay * 100
-      : currentRepayment?.repaymentAmount || 0;
+    let repayValue = repay ? repay * 100 : currentRepayment?.repaymentAmount || 0;
     return setCurrentRepayment({
       ...currentRepayment,
       repaymentAmount: repayValue,
@@ -161,11 +141,7 @@ const ReviewForm = ({
           gap: 1,
         }}
       >
-        <RepaymentCard
-          loan={previousSummary}
-          title={"Previous"}
-          isNew={false}
-        />
+        <RepaymentCard loan={previousSummary} title={"Previous"} isNew={false} />
         <StyledBox sx={{ justifyContent: "center" }}>
           <ArrowForwardIcon
             sx={{
@@ -174,11 +150,7 @@ const ReviewForm = ({
             }}
           />
         </StyledBox>
-        <RepaymentCard
-          loan={currentRepayment}
-          title={"Current Selected"}
-          isNew={true}
-        />
+        <RepaymentCard loan={currentRepayment} title={"Current Selected"} isNew={true} />
       </Box>
       <Box>
         <InputSlider
@@ -191,11 +163,7 @@ const ReviewForm = ({
         <Button variant="contained" onClick={handlePreviousStep} sx={{ mr: 3 }}>
           Previous Step
         </Button>
-        <Button
-          variant="contained"
-          color={"success"}
-          onClick={() => handleSubmit(currentRepayment)}
-        >
+        <Button variant="contained" color={"success"} onClick={() => handleSubmit(currentRepayment)}>
           Submit
         </Button>
       </Box>

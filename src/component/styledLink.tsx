@@ -3,13 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Colors } from "style/color";
 import { Link } from "@mui/material";
 
-const Navigation = ({
-  children,
-  path,
-}: {
-  children: React.ReactNode;
-  path: string;
-}) => {
+const Navigation = ({ children, path }: { children: React.ReactNode; path: string }) => {
   return (
     <Link
       component={RouterLink}

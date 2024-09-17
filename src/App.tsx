@@ -10,8 +10,8 @@ import ErrorBoundary from "pages/error/errorBoundry";
 import Portal from "pages/portal";
 import { Error404, Error401NoAcc, Error403AccessDenied } from "pages/error";
 
-import { getClientAsync } from "store/client";
-import { useAppSelector, useAppDispatch } from "store/hooks";
+import { getClientAsync } from "store/reducer/client";
+import { useAppSelector, useAppDispatch } from "store";
 
 const LoanDetails = lazy(() => import("pages/loanDetails"));
 const LoanCalculation = lazy(() => import("pages/loanRefix"));
@@ -44,20 +44,9 @@ function App() {
         <Router>
           <Suspense fallback={<></>}>
             <Switch>
-              <Route
-                path="/error_401_no_accounts"
-                exact
-                render={() => <Error401NoAcc />}
-              />
-              <Route
-                path="/access-denied"
-                exact
-                render={() => <Error403AccessDenied />}
-              />
-              <Route
-                path="/account/:accountId/refix"
-                component={LoanCalculation}
-              />
+              <Route path="/error_401_no_accounts" exact render={() => <Error401NoAcc />} />
+              <Route path="/access-denied" exact render={() => <Error403AccessDenied />} />
+              <Route path="/account/:accountId/refix" component={LoanCalculation} />
               <Route path="/account/:accountId" component={LoanDetails} />
               <Route exact path="/" component={Portal} />
               <Route path="*" component={Error404} />

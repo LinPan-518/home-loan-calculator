@@ -20,11 +20,7 @@ export const calculateSubunitToUnit = (num: number) => {
 };
 
 // convert to dollar with symbol
-export const convertToCurrencyUnit = (
-  num: number | undefined,
-  symbol?: string,
-  direction?: string,
-) => {
+export const convertToCurrencyUnit = (num: number | undefined, symbol?: string, direction?: string) => {
   let number = num ? num / 100 : 0;
   let format = "";
 
@@ -33,11 +29,7 @@ export const convertToCurrencyUnit = (
   if (!symbol) {
     return format;
   }
-  return symbol
-    ? direction === "RTL"
-      ? format + symbol
-      : symbol + format
-    : format;
+  return symbol ? (direction === "RTL" ? format + symbol : symbol + format) : format;
 };
 
 // convert to unit
@@ -47,5 +39,4 @@ export const convertToUnit = (num: number | undefined) => {
 };
 
 //round number to avoid precision issue
-export const roundNumber = (num: number) =>
-  Math.round((num + Number.EPSILON) * 100) / 100;
+export const roundNumber = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100;

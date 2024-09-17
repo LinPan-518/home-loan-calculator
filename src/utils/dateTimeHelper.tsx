@@ -28,7 +28,7 @@ const useCurrentTime = () => {
 // format UTC date to timezone date
 function formatDateToTimezone(date: string | Date, dateFormat = "dd MMM yyyy") {
   if (!date || !isValid(new Date(date))) {
-    return date.toString();
+    return date?.toString();
   }
   // Get the current timezone from the browser
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

@@ -2,17 +2,9 @@ import React, { useEffect } from "react";
 import numeral from "numeral";
 
 import Grid from "@mui/material/Grid2";
-import {
-  Typography,
-  Slider,
-  OutlinedInput,
-  InputLabel,
-  InputAdornment,
-  FormControl,
-  Paper,
-} from "@mui/material";
+import { Typography, Slider, OutlinedInput, InputLabel, InputAdornment, FormControl, Paper } from "@mui/material";
 import StepHeader from "./stepHeader";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector } from "store";
 
 interface IProps {
   minimalValue: number | undefined;
@@ -21,11 +13,7 @@ interface IProps {
 }
 type InputType = number | string;
 
-export default function InputSlider({
-  minimalValue,
-  maximumValue,
-  handleNewRepayment,
-}: IProps) {
+export default function InputSlider({ minimalValue, maximumValue, handleNewRepayment }: IProps) {
   const [value, setValue] = React.useState<InputType>(0);
   const { currencySymbol } = useAppSelector((state) => state.client);
 
@@ -87,14 +75,10 @@ export default function InputSlider({
           sx={{ width: "60%" }}
         />
         <FormControl sx={{ m: 1, width: "60%" }}>
-          <InputLabel htmlFor="outlined-adornment-amount">
-            Repayment Amount
-          </InputLabel>
+          <InputLabel htmlFor="outlined-adornment-amount">Repayment Amount</InputLabel>
           <OutlinedInput
             id="outlined-adornment-amount"
-            startAdornment={
-              <InputAdornment position="start">{currencySymbol}</InputAdornment>
-            }
+            startAdornment={<InputAdornment position="start">{currencySymbol}</InputAdornment>}
             label="Repayment Amount"
             onChange={handleInputChange}
             value={value}

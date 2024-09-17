@@ -18,7 +18,7 @@ import { sortByKey } from "utils/helper";
 import { convertToCurrencyUnit } from "utils/currencyHelper";
 import { formatDateToTimezone } from "utils/dateTimeHelper";
 
-import { useAppSelector } from "store/hooks";
+import { useAppSelector } from "store";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,9 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function subtotal(items: readonly Transaction[]) {
-  return items
-    .map(({ paidAmount }) => paidAmount)
-    .reduce((sum, i) => sum + i, 0);
+  return items.map(({ paidAmount }) => paidAmount).reduce((sum, i) => sum + i, 0);
 }
 
 const TransactionsTable = ({
@@ -65,19 +63,14 @@ const TransactionsTable = ({
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
   useEffect(() => {
     let data = sortByKey(transaction, "paidAt", "desc");
     // Calculate the slice of transaction for the current page
-    const currentTransactions = data.slice(
-      page * rowsPerPage,
-      page * rowsPerPage + rowsPerPage,
-    );
+    const currentTransactions = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
     setTranscations(currentTransactions);
   }, [transaction, page, rowsPerPage]);
 
@@ -108,37 +101,21 @@ const TransactionsTable = ({
           <TableBody>
             {currentTransactions.map((transaction) => (
               <StyledTableRow key={transaction.transactionId}>
-                <StyledTableCell>
-                  {formatDateToTimezone(transaction.paidAt)}
-                </StyledTableCell>
+                <StyledTableCell>{formatDateToTimezone(transaction.paidAt)}</StyledTableCell>
                 <StyledTableCell>{transaction.description}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {ccyFormat(transaction.paidAmount)}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {ccyFormat(transaction.remainingBalance)}
-                </StyledTableCell>
+                <StyledTableCell align="right">{ccyFormat(transaction.paidAmount)}</StyledTableCell>
+                <StyledTableCell align="right">{ccyFormat(transaction.remainingBalance)}</StyledTableCell>
               </StyledTableRow>
             ))}
             <StyledTableRow>
               <StyledTableCell colSpan={1} />
-              <StyledTableCell
-                colSpan={1}
-                align="right"
-                sx={{ bgcolor: Colors.Blue, color: Colors.White }}
-              >
+              <StyledTableCell colSpan={1} align="right" sx={{ bgcolor: Colors.Blue, color: Colors.White }}>
                 <strong>Totals for Period</strong>
               </StyledTableCell>
-              <StyledTableCell
-                align="right"
-                sx={{ bgcolor: Colors.MediumGrey }}
-              >
+              <StyledTableCell align="right" sx={{ bgcolor: Colors.MediumGrey }}>
                 {ccyFormat(subtotal(transaction))}
               </StyledTableCell>
-              <StyledTableCell
-                align="right"
-                sx={{ bgcolor: Colors.MediumGrey }}
-              >
+              <StyledTableCell align="right" sx={{ bgcolor: Colors.MediumGrey }}>
                 {ccyFormat(accountRemaining)}
               </StyledTableCell>
             </StyledTableRow>

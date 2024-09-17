@@ -1,13 +1,7 @@
 import React from "react";
 import { Typography, Divider, Box } from "@mui/material";
 
-const StepContainer = ({
-  children,
-  stepName,
-}: {
-  children?: React.ReactNode;
-  stepName: string;
-}) => {
+const StepContainer = ({ children, stepName }: { children?: React.ReactNode; stepName: string }) => {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

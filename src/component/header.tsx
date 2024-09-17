@@ -1,11 +1,4 @@
-import {
-  styled,
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Avatar,
-} from "@mui/material";
+import { styled, AppBar, Box, Toolbar, Typography, Avatar } from "@mui/material";
 import AdbIcon from "@mui/icons-material/Adb";
 
 import { ClientData } from "types";

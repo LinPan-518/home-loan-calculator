@@ -6,11 +6,7 @@ export function camelCaseToTitleCase(camelCaseString: string): string {
     .replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
 }
 
-export function sortByKey(
-  array: any[],
-  key: string,
-  direction: "asc" | "desc" | undefined,
-) {
+export function sortByKey(array: any[], key: string, direction: "asc" | "desc" | undefined) {
   const dir = direction === "desc" ? -1 : 1;
   return array.sort(function (a, b) {
     var x = a[key];

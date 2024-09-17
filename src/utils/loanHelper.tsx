@@ -37,9 +37,7 @@ export function calculateRepayment(homeLoan: HomeLoan) {
 
   // Calculate the monthly repayment using the formula:
   const monthlyPay =
-    ((loanAmount / 100) *
-      monthlyInterestRate *
-      Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+    ((loanAmount / 100) * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
     (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
   const monthlyRepayment = roundNumber(monthlyPay);
@@ -60,15 +58,12 @@ export function calculateLoanTermYears(
   const monthlyInterestRate = annualInterestRate / 1200;
   // Check if the monthly payment is enough to cover the interest
   if (monthlyPayment <= principal * monthlyInterestRate) {
-    throw new Error(
-      "Monthly payment is too low to cover interest. Loan will never be repaid.",
-    );
+    throw new Error("Monthly payment is too low to cover interest. Loan will never be repaid.");
   }
 
   // Number of months to repay the loan
   const numberOfMonths =
-    Math.log(1 - (principal * monthlyInterestRate) / monthlyPayment) /
-    Math.log(1 + monthlyInterestRate);
+    Math.log(1 - (principal * monthlyInterestRate) / monthlyPayment) / Math.log(1 + monthlyInterestRate);
 
   // Convert months to years
   const loanTermYears = Math.abs(numberOfMonths) / 12;
@@ -77,10 +72,7 @@ export function calculateLoanTermYears(
 }
 
 // calculate two dates period
-export function calculateYearsBetweenDates(
-  startDateStr: string,
-  endDateStr: string,
-): number {
+export function calculateYearsBetweenDates(startDateStr: string, endDateStr: string): number {
   if (!startDateStr || !endDateStr) {
     return 0;
   }
@@ -93,8 +85,7 @@ export function calculateYearsBetweenDates(
 
   if (
     endDate.getMonth() < startDate.getMonth() ||
-    (endDate.getMonth() === startDate.getMonth() &&
-      endDate.getDate() < startDate.getDate())
+    (endDate.getMonth() === startDate.getMonth() && endDate.getDate() < startDate.getDate())
   ) {
     yearsDifference--;
   }

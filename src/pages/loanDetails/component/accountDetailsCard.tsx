@@ -5,7 +5,7 @@ import { Account } from "types";
 import { formatDateToTimezone } from "utils/dateTimeHelper";
 import { convertToCurrencyUnit } from "utils/currencyHelper";
 import { camelCaseToTitleCase } from "utils/helper";
-import { useAppSelector } from "store/hooks";
+import { useAppSelector } from "store";
 
 import { Colors } from "style/color";
 

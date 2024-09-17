@@ -59,9 +59,7 @@ const FixedRateSelection = ({
               pointerEvents: isDisabled ? "none" : "auto",
               opacity: isDisabled && selectedRateId !== rate.rateId ? 0.5 : 1,
               cursor: isDisabled ? "not-allowed" : "default",
-              ...(selectedRateId === rate.rateId
-                ? { borderColor: Colors.DarkBlue, color: Colors.DarkBlue }
-                : {}),
+              ...(selectedRateId === rate.rateId ? { borderColor: Colors.DarkBlue, color: Colors.DarkBlue } : {}),
             }}
             key={rate.rateId}
             onClick={() => {
@@ -71,10 +69,7 @@ const FixedRateSelection = ({
               return handleRadioChange(rate.rateId);
             }}
           >
-            <Radio
-              checked={selectedRateId === rate.rateId}
-              disabled={isDisabled}
-            />
+            <Radio checked={selectedRateId === rate.rateId} disabled={isDisabled} />
             <Box sx={{ ml: 1 }}>
               <Typography>
                 {Number.isInteger(rate.period)
@@ -82,8 +77,7 @@ const FixedRateSelection = ({
                   : `${Math.round(rate.period * 12)} Months`}
               </Typography>
               <Typography variant="h3">
-                {rate.fixedRate}%{" "}
-                <span style={{ fontSize: "0.75em" }}>p.a.</span>
+                {rate.fixedRate}% <span style={{ fontSize: "0.75em" }}>p.a.</span>
               </Typography>
             </Box>
           </StyledBox>

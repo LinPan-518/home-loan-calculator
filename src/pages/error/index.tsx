@@ -44,8 +44,8 @@ const errorPageInfo: Record<string, IErrorInfo> = {
     message: (
       <span>
         Unfortunately, you have not been added to any accounts. <br />
-        Please contact your account administrator to get access. <br /> <br />{" "}
-        You can try logging in with a different account.
+        Please contact your account administrator to get access. <br /> <br /> You can try logging in with a different
+        account.
       </span>
     ),
     image: barrier2,
@@ -127,11 +127,7 @@ const ErrorPage: React.FC<IProps> = ({ errorType, children }) => {
         <Typography variant="body1" gutterBottom>
           {data.message}
         </Typography>
-        <Box
-          component="img"
-          src={data.image}
-          sx={{ width: "360px", height: "360px" }}
-        />
+        <Box component="img" src={data.image} sx={{ width: "360px", height: "360px" }} />
         {data.hasUniqLink && <>{data.uniqLink}</>}
         {!data.hasUniqLink && (
           <Navigation path="/">

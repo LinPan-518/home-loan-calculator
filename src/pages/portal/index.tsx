@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Redirect } from "react-router-dom";
 
 import Accordion from "@mui/material/Accordion";
@@ -14,40 +14,24 @@ import { Colors } from "style/color";
 import StyledBox from "component/muiComponent/flexBox";
 import AccountList from "./component/accountCard";
 import Skeleton from "./component/skeleton";
-import fetchJSON from "utils/fetchJson";
+import { getAccountsAsync } from "store/reducer/account";
 import { convertToCurrencyUnit } from "utils/currencyHelper";
-import { useAppSelector } from "store/hooks";
-import { Account } from "types";
+import { useAppDispatch, useAppSelector } from "store";
 
 const Home = () => {
-  const [data, setData] = useState<Account[]>([]);
-  const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState(true);
-  const symbol = useAppSelector((store) => store.client.currencySymbol);
-  const direction = useAppSelector((store) => store.client.currencyDirection);
+  const dispatch = useAppDispatch();
+  const { accounts: data, error, loading } = useAppSelector((store) => store.accounts);
+  const { currencySymbol: symbol, currencyDirection: direction } = useAppSelector((store) => store.client);
 
   useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        const accountResult = await fetchJSON(
-          `${process.env.PUBLIC_URL}/api/account.json`,
-        );
-        setData(accountResult?.data || []);
-      } catch (error) {
-        setError((error as Error).message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAllData();
+    dispatch(getAccountsAsync());
   }, []);
 
   const loanTotalValue = useMemo(() => {
     return data.reduce((sum, acc) => sum + acc.loanAmount, 0);
   }, [data]);
 
-  if (isLoading) return <Skeleton />;
+  if (loading) return <Skeleton />;
   if (error) return <Redirect to={"/not-found"} />;
 
   return (
@@ -109,9 +93,7 @@ const Home = () => {
                 <strong>Total of current home loans</strong>
               </Typography>
               <Typography>
-                <strong>
-                  {convertToCurrencyUnit(loanTotalValue, symbol, direction)}
-                </strong>
+                <strong>{convertToCurrencyUnit(loanTotalValue, symbol, direction)}</strong>
               </Typography>
             </StyledBox>
           </AccordionSummary>

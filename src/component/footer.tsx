@@ -38,9 +38,7 @@ const Footer: React.FC = () => {
       </Grid>
 
       <Grid size={12} margin={"10px 0"}>
-        <Typography>
-          If you have any questions, our team is available for help.
-        </Typography>
+        <Typography>If you have any questions, our team is available for help.</Typography>
       </Grid>
 
       <Grid size={12} margin={"10px 0 0"}>
@@ -57,9 +55,7 @@ const Footer: React.FC = () => {
         </Grid>
       </Grid>
       <Grid size={12}>
-        <Typography sx={{ fontSize: "0.7em" }}>
-          Copyright © 2024 Lin's Company
-        </Typography>
+        <Typography sx={{ fontSize: "0.7em" }}>Copyright © 2024 Lin's Company</Typography>
       </Grid>
     </Grid>
   );
